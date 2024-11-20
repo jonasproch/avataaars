@@ -3,7 +3,7 @@ import * as React from 'react'
 import Option from './Option'
 import { OptionContext, OptionsContext } from './OptionContext'
 
-function getComponentOptionValue (component: React.ComponentClass) {
+function getComponentOptionValue(component: React.ComponentClass) {
   const optionValue = (component as any).optionValue
   if (!optionValue) {
     throw new Error(`optionValue should be provided for ${component}`)
@@ -20,36 +20,39 @@ export default class Selector extends React.Component<Props> {
   static contextType = OptionsContext
   declare optionContext: OptionContext
 
-  UNSAFE_componentWillMount () {
+  constructor(props) {
+    super(props)
+
     const { option, defaultOption } = this.props
-    const { optionContext } = this
-    const defaultValue = (
-      typeof defaultOption === 'string' ?
-      defaultOption : getComponentOptionValue(defaultOption)
-    )
-    optionContext.addStateChangeListener(this.optionContextUpdate)
-    optionContext.optionEnter(option.key)
-    const optionState = optionContext.getOptionState(option.key)
+    const defaultValue =
+      typeof defaultOption === 'string'
+        ? defaultOption
+        : getComponentOptionValue(defaultOption)
+    this.optionContext.addStateChangeListener(this.optionContextUpdate)
+    this.optionContext.optionEnter(option.key)
+    const optionState = this.optionContext.getOptionState(option.key)
     this.updateOptionValues()
     if (optionState) {
-      optionContext.setDefaultValue(option.key, defaultValue)
+      this.optionContext.setDefaultValue(option.key, defaultValue)
     }
   }
 
-  UNSAFE_componentWillUpdate (nextProps: Props & { children?: React.ReactNode }) {
+  UNSAFE_componentWillUpdate(
+    nextProps: Props & { children?: React.ReactNode }
+  ) {
     this.updateOptionValues(nextProps)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.optionContext.removeStateChangeListener(this.optionContextUpdate)
     this.optionContext.optionExit(this.props.option.key)
   }
 
-  render () {
+  render() {
     let result: React.ReactNode | null = null
     const { option, children } = this.props
     const value = this.optionContext.getValue(option.key)!
-    React.Children.forEach(children, child => {
+    React.Children.forEach(children, (child) => {
       if (getComponentOptionValue((child as any).type) === value) {
         result = child
       }
@@ -61,7 +64,7 @@ export default class Selector extends React.Component<Props> {
     this.forceUpdate()
   }
 
-  private updateOptionValues (
+  private updateOptionValues(
     nextProps?: Props & { children?: React.ReactNode }
   ) {
     if (nextProps && this.props.children === nextProps.children) {
@@ -71,7 +74,7 @@ export default class Selector extends React.Component<Props> {
     const values = React.Children.map(
       children,
       // TODO: also validate and throw error if we don't see optionValue
-      child => getComponentOptionValue((child as any).type)
+      (child) => getComponentOptionValue((child as any).type)
     )
     if (new Set(values).size !== values?.length) {
       throw new Error('Duplicate values')
