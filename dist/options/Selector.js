@@ -26,26 +26,24 @@ function getComponentOptionValue(component) {
 }
 var Selector = /** @class */ (function (_super) {
     __extends(Selector, _super);
-    function Selector() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function Selector(props) {
+        var _this = _super.call(this, props) || this;
         _this.optionContextUpdate = function () {
             _this.forceUpdate();
         };
+        var _a = _this.props, option = _a.option, defaultOption = _a.defaultOption;
+        var defaultValue = typeof defaultOption === 'string'
+            ? defaultOption
+            : getComponentOptionValue(defaultOption);
+        _this.optionContext.addStateChangeListener(_this.optionContextUpdate);
+        _this.optionContext.optionEnter(option.key);
+        var optionState = _this.optionContext.getOptionState(option.key);
+        _this.updateOptionValues();
+        if (optionState) {
+            _this.optionContext.setDefaultValue(option.key, defaultValue);
+        }
         return _this;
     }
-    Selector.prototype.UNSAFE_componentWillMount = function () {
-        var _a = this.props, option = _a.option, defaultOption = _a.defaultOption;
-        var optionContext = this.optionContext;
-        var defaultValue = (typeof defaultOption === 'string' ?
-            defaultOption : getComponentOptionValue(defaultOption));
-        optionContext.addStateChangeListener(this.optionContextUpdate);
-        optionContext.optionEnter(option.key);
-        var optionState = optionContext.getOptionState(option.key);
-        this.updateOptionValues();
-        if (optionState) {
-            optionContext.setDefaultValue(option.key, defaultValue);
-        }
-    };
     Selector.prototype.UNSAFE_componentWillUpdate = function (nextProps) {
         this.updateOptionValues(nextProps);
     };

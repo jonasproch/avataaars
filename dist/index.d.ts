@@ -35,10 +35,10 @@ export default class AvatarComponent extends React.Component<Props> {
 export declare class Piece extends React.Component<Props> {
     static contextType: React.Context<OptionContext | null>;
     optionContext: OptionContext;
+    constructor(props: any);
     getChildContext(): {
         optionContext: OptionContext;
     };
-    UNSAFE_componentWillMount(): void;
     UNSAFE_componentWillReceiveProps(nextProps: Props): void;
     render(): JSX.Element;
     private updateOptionContext;
