@@ -1,7 +1,7 @@
 {
-  "name": "avataaars",
-  "version": "2.0.0",
-  "description": "React component for avataaars",
+  "name": "avataaars-sentisquare",
+  "version": "1.0.0",
+  "description": "Modernized React component for avataaars",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
