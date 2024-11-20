@@ -15,8 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Piece = exports.allOptions = exports.OptionContext = exports.Option = exports.AvatarStyle = exports.Avatar = void 0;
-var PropTypes = require("prop-types");
+exports.Piece = exports.allOptions = exports.OptionsContext = exports.OptionContext = exports.Option = exports.AvatarStyle = exports.Avatar = void 0;
 var React = require("react");
 var avatar_1 = require("./avatar");
 var options_1 = require("./options");
@@ -26,6 +25,7 @@ Object.defineProperty(exports, "AvatarStyle", { enumerable: true, get: function 
 var options_2 = require("./options");
 Object.defineProperty(exports, "Option", { enumerable: true, get: function () { return options_2.Option; } });
 Object.defineProperty(exports, "OptionContext", { enumerable: true, get: function () { return options_2.OptionContext; } });
+Object.defineProperty(exports, "OptionsContext", { enumerable: true, get: function () { return options_2.OptionsContext; } });
 Object.defineProperty(exports, "allOptions", { enumerable: true, get: function () { return options_2.allOptions; } });
 var piece_1 = require("./avatar/piece");
 var AvatarComponent = /** @class */ (function (_super) {
@@ -46,7 +46,8 @@ var AvatarComponent = /** @class */ (function (_super) {
     };
     AvatarComponent.prototype.render = function () {
         var _a = this.props, avatarStyle = _a.avatarStyle, style = _a.style, className = _a.className;
-        return React.createElement(avatar_1.default, { avatarStyle: avatarStyle, style: style, className: className });
+        return (React.createElement(options_1.OptionsContext.Provider, { value: this.optionContext },
+            React.createElement(avatar_1.default, { avatarStyle: avatarStyle, style: style, className: className })));
     };
     AvatarComponent.prototype.updateOptionContext = function (props) {
         var data = {};
@@ -60,18 +61,13 @@ var AvatarComponent = /** @class */ (function (_super) {
         }
         this.optionContext.setData(data);
     };
-    AvatarComponent.childContextTypes = {
-        optionContext: PropTypes.instanceOf(options_1.OptionContext)
-    };
     return AvatarComponent;
 }(React.Component));
 exports.default = AvatarComponent;
 var Piece = /** @class */ (function (_super) {
     __extends(Piece, _super);
     function Piece() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.optionContext = new options_1.OptionContext(options_1.allOptions);
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Piece.prototype.getChildContext = function () {
         return { optionContext: this.optionContext };
@@ -84,7 +80,7 @@ var Piece = /** @class */ (function (_super) {
     };
     Piece.prototype.render = function () {
         var _a = this.props, avatarStyle = _a.avatarStyle, style = _a.style, pieceType = _a.pieceType, pieceSize = _a.pieceSize, viewBox = _a.viewBox;
-        return React.createElement(piece_1.default, { avatarStyle: avatarStyle, style: style, pieceType: pieceType, pieceSize: pieceSize, viewBox: viewBox });
+        return (React.createElement(piece_1.default, { avatarStyle: avatarStyle, style: style, pieceType: pieceType, pieceSize: pieceSize, viewBox: viewBox }));
     };
     Piece.prototype.updateOptionContext = function (props) {
         var data = {};
@@ -98,9 +94,7 @@ var Piece = /** @class */ (function (_super) {
         }
         this.optionContext.setData(data);
     };
-    Piece.childContextTypes = {
-        optionContext: PropTypes.instanceOf(options_1.OptionContext)
-    };
+    Piece.contextType = options_1.OptionsContext;
     return Piece;
 }(React.Component));
 exports.Piece = Piece;

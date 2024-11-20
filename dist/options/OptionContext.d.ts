@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import Option from './Option';
 export interface OptionState {
     key: string;
@@ -8,7 +9,8 @@ export interface OptionState {
 export declare type OptionContextState = {
     [index: string]: OptionState;
 };
-export default class OptionContext {
+export declare const OptionsContext: import("react").Context<OptionContext | null>;
+export declare class OptionContext {
     private stateChangeListeners;
     private valueChangeListeners;
     private _state;

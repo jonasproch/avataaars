@@ -15,7 +15,6 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var PropTypes = require("prop-types");
 var React = require("react");
 var OptionContext_1 = require("./OptionContext");
 function getComponentOptionValue(component) {
@@ -34,13 +33,6 @@ var Selector = /** @class */ (function (_super) {
         };
         return _this;
     }
-    Object.defineProperty(Selector.prototype, "optionContext", {
-        get: function () {
-            return this.context.optionContext;
-        },
-        enumerable: false,
-        configurable: true
-    });
     Selector.prototype.UNSAFE_componentWillMount = function () {
         var _a = this.props, option = _a.option, defaultOption = _a.defaultOption;
         var optionContext = this.optionContext;
@@ -85,9 +77,7 @@ var Selector = /** @class */ (function (_super) {
         }
         this.optionContext.setOptions(option.key, values);
     };
-    Selector.contextTypes = {
-        optionContext: PropTypes.instanceOf(OptionContext_1.default)
-    };
+    Selector.contextType = OptionContext_1.OptionsContext;
     return Selector;
 }(React.Component));
 exports.default = Selector;
