@@ -11,8 +11,8 @@
     "react",
     "avatar"
   ],
-  "repository": "git@github.com:fangpenlin/avataaars.git",
-  "author": "Fang-Pen Lin <hello@fangpenlin.com>",
+  "repository": "git@github.com:sentisquare-jonas/avataaars.git",
+  "author": "Fang-Pen Lin <hello@fangpenlin.com>, Jonáš Procházka",
   "license": "MIT",
   "peerDependencies": {
     "react": "^17.0.0"
