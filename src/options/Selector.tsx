@@ -1,8 +1,7 @@
-import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
 import Option from './Option'
-import OptionContext from './OptionContext'
+import { OptionContext, OptionsContext } from './OptionContext'
 
 function getComponentOptionValue (component: React.ComponentClass) {
   const optionValue = (component as any).optionValue
@@ -18,13 +17,8 @@ export interface Props {
 }
 
 export default class Selector extends React.Component<Props> {
-  static contextTypes = {
-    optionContext: PropTypes.instanceOf(OptionContext)
-  }
-
-  private get optionContext (): OptionContext {
-    return this.context.optionContext
-  }
+  static contextType = OptionsContext
+  declare optionContext: OptionContext
 
   UNSAFE_componentWillMount () {
     const { option, defaultOption } = this.props
