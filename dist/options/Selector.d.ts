@@ -8,7 +8,7 @@ export interface Props {
 export default class Selector extends React.Component<Props> {
     static contextType: React.Context<OptionContext | null>;
     optionContext: OptionContext;
-    constructor(props: any);
+    componentDidMount(): void;
     UNSAFE_componentWillUpdate(nextProps: Props & {
         children?: React.ReactNode;
     }): void;

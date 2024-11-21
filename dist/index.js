@@ -66,11 +66,12 @@ var AvatarComponent = /** @class */ (function (_super) {
 exports.default = AvatarComponent;
 var Piece = /** @class */ (function (_super) {
     __extends(Piece, _super);
-    function Piece(props) {
-        var _this = _super.call(this, props) || this;
-        _this.updateOptionContext(_this.props);
-        return _this;
+    function Piece() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
+    Piece.prototype.UNSAFE_componentWillMount = function () {
+        this.updateOptionContext(this.props);
+    };
     Piece.prototype.getChildContext = function () {
         return { optionContext: this.optionContext };
     };
