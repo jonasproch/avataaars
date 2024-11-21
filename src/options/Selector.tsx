@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import Option from './Option'
-import { OptionContext, OptionsContext } from './OptionContext'
+import { OptionsContext } from './OptionContext'
 
 function getComponentOptionValue(component: React.ComponentClass) {
   const optionValue = (component as any).optionValue
@@ -18,7 +18,6 @@ export interface Props {
 
 export default class Selector extends React.Component<Props> {
   static contextType = OptionsContext
-  declare optionContext: OptionContext
 
   componentDidMount() {
     const { option, defaultOption } = this.props
@@ -26,12 +25,12 @@ export default class Selector extends React.Component<Props> {
       typeof defaultOption === 'string'
         ? defaultOption
         : getComponentOptionValue(defaultOption)
-    this.optionContext.addStateChangeListener(this.optionContextUpdate)
-    this.optionContext.optionEnter(option.key)
-    const optionState = this.optionContext.getOptionState(option.key)
+    this.context.addStateChangeListener(this.optionContextUpdate)
+    this.context.optionEnter(option.key)
+    const optionState = this.context.getOptionState(option.key)
     this.updateOptionValues()
     if (optionState) {
-      this.optionContext.setDefaultValue(option.key, defaultValue)
+      this.context.setDefaultValue(option.key, defaultValue)
     }
   }
 
@@ -42,8 +41,8 @@ export default class Selector extends React.Component<Props> {
   }
 
   componentWillUnmount() {
-    this.optionContext.removeStateChangeListener(this.optionContextUpdate)
-    this.optionContext.optionExit(this.props.option.key)
+    this.context.removeStateChangeListener(this.optionContextUpdate)
+    this.context.optionExit(this.props.option.key)
   }
 
   render() {
@@ -78,6 +77,6 @@ export default class Selector extends React.Component<Props> {
     if (new Set(values).size !== values?.length) {
       throw new Error('Duplicate values')
     }
-    this.optionContext.setOptions(option.key, values)
+    this.context.setOptions(option.key, values)
   }
 }

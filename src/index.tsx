@@ -72,14 +72,13 @@ export default class AvatarComponent extends React.Component<Props> {
 
 export class Piece extends React.Component<Props> {
   static contextType = OptionsContext
-  declare optionContext: OptionContext
 
   UNSAFE_componentWillMount() {
     this.updateOptionContext(this.props)
   }
 
   getChildContext() {
-    return { optionContext: this.optionContext }
+    return { optionContext: this.context }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
@@ -108,6 +107,6 @@ export class Piece extends React.Component<Props> {
       }
       data[option.key] = value
     }
-    this.optionContext.setData(data)
+    this.context.setData(data)
   }
 }
