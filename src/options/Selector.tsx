@@ -20,9 +20,7 @@ export default class Selector extends React.Component<Props> {
   static contextType = OptionsContext
   declare optionContext: OptionContext
 
-  constructor(props) {
-    super(props)
-
+  componentDidMount() {
     const { option, defaultOption } = this.props
     const defaultValue =
       typeof defaultOption === 'string'

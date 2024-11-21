@@ -74,9 +74,7 @@ export class Piece extends React.Component<Props> {
   static contextType = OptionsContext
   declare optionContext: OptionContext
 
-  constructor(props) {
-    super(props)
-
+  UNSAFE_componentWillMount() {
     this.updateOptionContext(this.props)
   }
 
