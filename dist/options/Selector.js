@@ -38,20 +38,20 @@ var Selector = /** @class */ (function (_super) {
         var defaultValue = typeof defaultOption === 'string'
             ? defaultOption
             : getComponentOptionValue(defaultOption);
-        this.optionContext.addStateChangeListener(this.optionContextUpdate);
-        this.optionContext.optionEnter(option.key);
-        var optionState = this.optionContext.getOptionState(option.key);
+        this.context.addStateChangeListener(this.optionContextUpdate);
+        this.context.optionEnter(option.key);
+        var optionState = this.context.getOptionState(option.key);
         this.updateOptionValues();
         if (optionState) {
-            this.optionContext.setDefaultValue(option.key, defaultValue);
+            this.context.setDefaultValue(option.key, defaultValue);
         }
     };
     Selector.prototype.UNSAFE_componentWillUpdate = function (nextProps) {
         this.updateOptionValues(nextProps);
     };
     Selector.prototype.componentWillUnmount = function () {
-        this.optionContext.removeStateChangeListener(this.optionContextUpdate);
-        this.optionContext.optionExit(this.props.option.key);
+        this.context.removeStateChangeListener(this.optionContextUpdate);
+        this.context.optionExit(this.props.option.key);
     };
     Selector.prototype.render = function () {
         var result = null;
@@ -77,7 +77,7 @@ var Selector = /** @class */ (function (_super) {
         if (new Set(values).size !== (values === null || values === void 0 ? void 0 : values.length)) {
             throw new Error('Duplicate values');
         }
-        this.optionContext.setOptions(option.key, values);
+        this.context.setOptions(option.key, values);
     };
     Selector.contextType = OptionContext_1.OptionsContext;
     return Selector;

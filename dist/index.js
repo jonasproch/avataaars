@@ -73,7 +73,7 @@ var Piece = /** @class */ (function (_super) {
         this.updateOptionContext(this.props);
     };
     Piece.prototype.getChildContext = function () {
-        return { optionContext: this.optionContext };
+        return { optionContext: this.context };
     };
     Piece.prototype.UNSAFE_componentWillReceiveProps = function (nextProps) {
         this.updateOptionContext(nextProps);
@@ -92,7 +92,7 @@ var Piece = /** @class */ (function (_super) {
             }
             data[option.key] = value;
         }
-        this.optionContext.setData(data);
+        this.context.setData(data);
     };
     Piece.contextType = options_1.OptionsContext;
     return Piece;
