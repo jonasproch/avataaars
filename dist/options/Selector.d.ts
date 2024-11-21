@@ -13,7 +13,7 @@ export default class Selector extends React.Component<Props> {
         children?: React.ReactNode;
     }): void;
     componentWillUnmount(): void;
-    render(): null;
+    render(): null | undefined;
     private optionContextUpdate;
     private updateOptionValues;
 }

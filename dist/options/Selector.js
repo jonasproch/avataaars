@@ -56,7 +56,9 @@ var Selector = /** @class */ (function (_super) {
     Selector.prototype.render = function () {
         var result = null;
         var _a = this.props, option = _a.option, children = _a.children;
-        var value = this.optionContext.getValue(option.key);
+        if (!this.context)
+            return;
+        var value = this.context.getValue(option.key);
         React.Children.forEach(children, function (child) {
             if (getComponentOptionValue(child.type) === value) {
                 result = child;
