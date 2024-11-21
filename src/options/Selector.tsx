@@ -49,7 +49,8 @@ export default class Selector extends React.Component<Props> {
   render() {
     let result: React.ReactNode | null = null
     const { option, children } = this.props
-    const value = this.optionContext.getValue(option.key)!
+    if (!this.context) return
+    const value = this.context.getValue(option.key)!
     React.Children.forEach(children, (child) => {
       if (getComponentOptionValue((child as any).type) === value) {
         result = child
