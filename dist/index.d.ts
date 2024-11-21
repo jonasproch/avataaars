@@ -34,7 +34,7 @@ export default class AvatarComponent extends React.Component<Props> {
 }
 export declare class Piece extends React.Component<Props> {
     static contextType: React.Context<OptionContext | null>;
-    UNSAFE_componentWillMount(): void;
+    componentDidMount(): void;
     getChildContext(): {
         optionContext: any;
     };

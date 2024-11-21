@@ -73,7 +73,7 @@ export default class AvatarComponent extends React.Component<Props> {
 export class Piece extends React.Component<Props> {
   static contextType = OptionsContext
 
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this.updateOptionContext(this.props)
   }
 

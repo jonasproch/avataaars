@@ -69,7 +69,7 @@ var Piece = /** @class */ (function (_super) {
     function Piece() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Piece.prototype.UNSAFE_componentWillMount = function () {
+    Piece.prototype.componentDidMount = function () {
         this.updateOptionContext(this.props);
     };
     Piece.prototype.getChildContext = function () {
