@@ -38,14 +38,17 @@ var AvatarComponent = /** @class */ (function (_super) {
     AvatarComponent.prototype.getChildContext = function () {
         return { optionContext: this.optionContext };
     };
-    AvatarComponent.prototype.UNSAFE_componentWillMount = function () {
+    AvatarComponent.prototype.componentDidMount = function () {
         this.updateOptionContext(this.props);
     };
-    AvatarComponent.prototype.UNSAFE_componentWillReceiveProps = function (nextProps) {
-        this.updateOptionContext(nextProps);
+    AvatarComponent.prototype.componentDidUpdate = function (prevProps) {
+        if (prevProps !== this.props) {
+            this.updateOptionContext(this.props);
+        }
     };
     AvatarComponent.prototype.render = function () {
         var _a = this.props, avatarStyle = _a.avatarStyle, style = _a.style, className = _a.className;
+        console.log('option context', this.optionContext);
         return (React.createElement(options_1.OptionsContext.Provider, { value: this.optionContext },
             React.createElement(avatar_1.default, { avatarStyle: avatarStyle, style: style, className: className })));
     };

@@ -36,16 +36,19 @@ export default class AvatarComponent extends React.Component<Props> {
     return { optionContext: this.optionContext }
   }
 
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this.updateOptionContext(this.props)
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    this.updateOptionContext(nextProps)
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      this.updateOptionContext(this.props)
+    }
   }
 
   render() {
     const { avatarStyle, style, className } = this.props
+    console.log('option context', this.optionContext)
     return (
       <OptionsContext.Provider value={this.optionContext}>
         <Avatar
