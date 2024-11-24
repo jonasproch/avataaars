@@ -32,10 +32,6 @@ export interface Props {
 export default class AvatarComponent extends React.Component<Props> {
   private optionContext: OptionContext = new OptionContext(allOptions)
 
-  getChildContext() {
-    return { optionContext: this.optionContext }
-  }
-
   componentDidMount() {
     this.updateOptionContext(this.props)
   }
@@ -78,10 +74,6 @@ export class Piece extends React.Component<Props> {
 
   componentDidMount() {
     this.updateOptionContext(this.props)
-  }
-
-  getChildContext() {
-    return { optionContext: this.context }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
