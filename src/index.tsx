@@ -44,7 +44,6 @@ export default class AvatarComponent extends React.Component<Props> {
 
   render() {
     const { avatarStyle, style, className } = this.props
-    console.log('option context', this.optionContext)
     return (
       <OptionsContext.Provider value={this.optionContext}>
         <Avatar
@@ -70,7 +69,7 @@ export default class AvatarComponent extends React.Component<Props> {
 }
 
 export class Piece extends React.Component<Props> {
-  static contextType = OptionsContext
+  private optionContext: OptionContext = new OptionContext(allOptions)
 
   componentDidMount() {
     this.updateOptionContext(this.props)
@@ -83,13 +82,15 @@ export class Piece extends React.Component<Props> {
   render() {
     const { avatarStyle, style, pieceType, pieceSize, viewBox } = this.props
     return (
-      <PieceComponent
-        avatarStyle={avatarStyle as AvatarStyle}
-        style={style}
-        pieceType={pieceType}
-        pieceSize={pieceSize}
-        viewBox={viewBox}
-      />
+      <OptionsContext.Provider value={this.optionContext}>
+        <PieceComponent
+          avatarStyle={avatarStyle as AvatarStyle}
+          style={style}
+          pieceType={pieceType}
+          pieceSize={pieceSize}
+          viewBox={viewBox}
+        />
+      </OptionsContext.Provider>
     )
   }
 
@@ -102,6 +103,6 @@ export class Piece extends React.Component<Props> {
       }
       data[option.key] = value
     }
-    this.context.setData(data)
+    this.optionContext.setData(data)
   }
 }
