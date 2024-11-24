@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { OptionContext } from './options';
 export { default as Avatar, AvatarStyle } from './avatar';
 export { Option, OptionContext, OptionsContext, allOptions } from './options';
 export interface Props {
@@ -30,7 +29,7 @@ export default class AvatarComponent extends React.Component<Props> {
     private updateOptionContext;
 }
 export declare class Piece extends React.Component<Props> {
-    static contextType: React.Context<OptionContext | null>;
+    private optionContext;
     componentDidMount(): void;
     UNSAFE_componentWillReceiveProps(nextProps: Props): void;
     render(): JSX.Element;

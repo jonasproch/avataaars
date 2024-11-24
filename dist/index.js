@@ -45,7 +45,6 @@ var AvatarComponent = /** @class */ (function (_super) {
     };
     AvatarComponent.prototype.render = function () {
         var _a = this.props, avatarStyle = _a.avatarStyle, style = _a.style, className = _a.className;
-        console.log('option context', this.optionContext);
         return (React.createElement(options_1.OptionsContext.Provider, { value: this.optionContext },
             React.createElement(avatar_1.default, { avatarStyle: avatarStyle, style: style, className: className })));
     };
@@ -67,7 +66,9 @@ exports.default = AvatarComponent;
 var Piece = /** @class */ (function (_super) {
     __extends(Piece, _super);
     function Piece() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.optionContext = new options_1.OptionContext(options_1.allOptions);
+        return _this;
     }
     Piece.prototype.componentDidMount = function () {
         this.updateOptionContext(this.props);
@@ -77,7 +78,8 @@ var Piece = /** @class */ (function (_super) {
     };
     Piece.prototype.render = function () {
         var _a = this.props, avatarStyle = _a.avatarStyle, style = _a.style, pieceType = _a.pieceType, pieceSize = _a.pieceSize, viewBox = _a.viewBox;
-        return (React.createElement(piece_1.default, { avatarStyle: avatarStyle, style: style, pieceType: pieceType, pieceSize: pieceSize, viewBox: viewBox }));
+        return (React.createElement(options_1.OptionsContext.Provider, { value: this.optionContext },
+            React.createElement(piece_1.default, { avatarStyle: avatarStyle, style: style, pieceType: pieceType, pieceSize: pieceSize, viewBox: viewBox })));
     };
     Piece.prototype.updateOptionContext = function (props) {
         var data = {};
@@ -89,9 +91,8 @@ var Piece = /** @class */ (function (_super) {
             }
             data[option.key] = value;
         }
-        this.context.setData(data);
+        this.optionContext.setData(data);
     };
-    Piece.contextType = options_1.OptionsContext;
     return Piece;
 }(React.Component));
 exports.Piece = Piece;
